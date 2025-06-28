@@ -1,14 +1,14 @@
-package com.spring.boot.async.bench.consumer;
+package com.spring.boot.async.bench.queue;
 
 import com.spring.boot.async.bench.service.JobService;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JobConsumer {
+public class RabbitMQJobConsumer {
     private final JobService jobService;
 
-    public JobConsumer(JobService jobService) {
+    public RabbitMQJobConsumer(JobService jobService) {
         this.jobService = jobService;
     }
 

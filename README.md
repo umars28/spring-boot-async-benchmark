@@ -31,3 +31,14 @@ Start the Spring Boot application and run benchmarks:
 ab -n 100 -c 10 http://localhost:8080/job/sync
 ab -n 100 -c 10 http://localhost:8080/job/async-simple
 ab -n 100 -c 10 http://localhost:8080/job/async-threadpool
+```
+
+| Strategy        | Concurrency | Request Count | Avg Response Time | Max Latency | QPS (Throughput) | Notes              |
+| --------------- | ----------- | ------------- | ----------------- | ----------- | ---------------- | ------------------ |
+| Sync            | 50          | 1000          |                   |             |                  |                    |
+| SimpleAsync     | 50          | 1000          |                   |             |                  |                    |
+| ThreadPoolAsync | 50          | 1000          |                   |             |                  |                    |
+| RabbitMQ        | 50          | 1000          |                   |             |                  | Queue latency juga |
+| Kafka           | 50          | 1000          |                   |             |                  | Queue latency juga |
+| Redis Queue     | 50          | 1000          |                   |             |                  | Queue latency juga |
+
