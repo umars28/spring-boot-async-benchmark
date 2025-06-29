@@ -17,19 +17,19 @@ RESULT_DIR="results"
 
 mkdir -p "$RESULT_DIR"
 
-echo "📊 Starting Test Case 2: Lightweight Job, Higher Volume Benchmark"
-echo "📝 Requests: $REQUESTS  | Concurrency: $CONCURRENCY"
+echo "Starting Test Case 2: Lightweight Job, Higher Volume Benchmark"
+echo "Requests: $REQUESTS  | Concurrency: $CONCURRENCY"
 echo "--------------------------------------------------"
 
 for endpoint in "${ENDPOINTS[@]}"; do
   FILENAME="${endpoint//\//_}_${TESTCASE_ID}.txt"
-  echo "🔍 Testing endpoint: $endpoint"
+  echo "Testing endpoint: $endpoint"
   START=$(date +%s)
   ab -n $REQUESTS -c $CONCURRENCY "$BASE_URL/$endpoint" > "$RESULT_DIR/$FILENAME"
   END=$(date +%s)
-  echo "⏱️ Duration: $((END - START)) seconds"
-  echo "✅ Saved result to: $RESULT_DIR/$FILENAME"
+  echo "Duration: $((END - START)) seconds"
+  echo "Saved result to: $RESULT_DIR/$FILENAME"
   echo "--------------------------------------------------"
 done
 
-echo "✅ All benchmarks for Test Case 2 done."
+echo "All benchmarks for Test Case 2 done."

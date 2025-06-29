@@ -1,44 +1,73 @@
-# Spring Sync vs Async Benchmark
+# 🚀 Spring Sync vs Async Benchmark
 
 This project benchmarks and compares various synchronous and asynchronous execution strategies in a Spring Boot application. It provides insights into the performance trade-offs between different async mechanisms, including built-in executors and external message brokers.
 
+---
+
 ## ✅ Execution Methods Compared
 
-- 🔁 **Synchronous** (`blocking`, traditional Spring MVC controller)
-- ⚙️ **@Async** with `SimpleAsyncTaskExecutor` (default)
-- 🧵 **@Async** with `ThreadPoolTaskExecutor` (custom pool)
-- 📨 **RabbitMQ** (asynchronous message queue)
-- 🛰️ **Kafka** (high-throughput async messaging)
-- 🧠 **Redis Pub/Sub** (lightweight event-based async)
+- 🔁 **Synchronous** – Traditional blocking request
+- ⚙️ **@Async (Simple)** – Using `SimpleAsyncTaskExecutor`
+- 🧵 **@Async (ThreadPool)** – Using `ThreadPoolTaskExecutor`
+- 📨 **RabbitMQ** – Using queue-based async with RabbitMQ
+- 🛰️ **Kafka** – Using distributed message broker
+- 🧠 **Redis Pub/Sub** – Lightweight publish-subscribe pattern
+
+---
 
 ## 📊 Tools Used
 
-- ApacheBench (`ab`) – for request throughput and latency testing
-- Micrometer – to collect application-level metrics
-- Spring Boot Actuator – for exposing metrics
-- (Optional) Prometheus + Grafana – for visualization
+- ApacheBench (`ab`) – Load testing tool
+- Bash scripts – For orchestrating test cases and collecting metrics
+- Optional: Micrometer, Prometheus, Grafana – for deeper observability
 
-## 📈 Goals
+---
 
-- Compare request latency and throughput between sync and async techniques
-- Demonstrate how different strategies behave under load
+## 🎯 Benchmark Goals
 
-## 🛠️ How to Run
+- Measure throughput (requests per second)
+- Measure request latency (time per request)
+- Evaluate scalability across increasing loads and concurrency
 
-Start the Spring Boot application and run benchmarks:
+---
+
+## 🛠️ How to Run the Benchmark
+
+### 1️⃣ Jalankan Spring Boot Application
 
 ```bash
-ab -n 100 -c 10 http://localhost:8080/job/sync
-ab -n 100 -c 10 http://localhost:8080/job/async-simple
-ab -n 100 -c 10 http://localhost:8080/job/async-threadpool
+./mvnw spring-boot:run
 ```
 
-| Strategy        | Concurrency | Request Count | Avg Response Time | Max Latency | QPS (Throughput) | Notes              |
-| --------------- | ----------- | ------------- | ----------------- | ----------- | ---------------- | ------------------ |
-| Sync            | 50          | 1000          |                   |             |                  |                    |
-| SimpleAsync     | 50          | 1000          |                   |             |                  |                    |
-| ThreadPoolAsync | 50          | 1000          |                   |             |                  |                    |
-| RabbitMQ        | 50          | 1000          |                   |             |                  | Queue latency juga |
-| Kafka           | 50          | 1000          |                   |             |                  | Queue latency juga |
-| Redis Queue     | 50          | 1000          |                   |             |                  | Queue latency juga |
+## 2️⃣ Jalankan Benchmark Test Cases
 
+Empat skenario benchmark disediakan untuk menguji performa berbagai strategi dalam kondisi berbeda:
+
+| Script                | Request Count | Concurrency | Tujuan                          |
+|-----------------------|--------------|-------------|----------------------------------|
+| `run-test-case-1.sh`  | 100          | 1           | Lightweight / baseline test      |
+| `run-test-case-2.sh`  | 500          | 1           | Moderate load, tanpa concurrency |
+| `run-test-case-3.sh`  | 500          | 10          | Concurrency test                 |
+| `run-test-case-4.sh`  | 1000          | 20          | Stress test / scalability test   |
+
+📦 Jalankan semua script ini satu per satu:
+
+```bash
+/bin/bash run-test-case-1.sh
+/bin/bash run-test-case-2.sh
+/bin/bash run-test-case-3.sh
+/bin/bash run-test-case-4.sh
+```
+
+## 3️⃣ Generate Benchmark Summary
+
+Setelah semua benchmark dijalankan, hasilnya dapat dirangkum dalam bentuk tabel yang mudah dianalisis:
+
+```bash
+/bin/bash summarize-results.sh | tee summary.md
+```
+
+## 4️⃣ Interpretasi dan Analisis Hasil
+```markdown
+- [`summary.md`](./summary.md)
+```
