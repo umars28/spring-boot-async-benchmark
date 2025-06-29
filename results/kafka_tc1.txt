@@ -1,0 +1,42 @@
+This is ApacheBench, Version 2.3 <$Revision: 1879490 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient).....done
+
+
+Server Software:        
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /api/job/kafka
+Document Length:        23 bytes
+
+Concurrency Level:      1
+Time taken for tests:   0.222 seconds
+Complete requests:      100
+Failed requests:        0
+Total transferred:      15600 bytes
+HTML transferred:       2300 bytes
+Requests per second:    449.69 [#/sec] (mean)
+Time per request:       2.224 [ms] (mean)
+Time per request:       2.224 [ms] (mean, across all concurrent requests)
+Transfer rate:          68.51 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.4      0       4
+Processing:     1    2   1.7      1      15
+Waiting:        1    2   1.5      1      15
+Total:          1    2   1.8      2      15
+
+Percentage of the requests served within a certain time (ms)
+  50%      2
+  66%      2
+  75%      2
+  80%      2
+  90%      4
+  95%      5
+  98%     10
+  99%     15
+ 100%     15 (longest request)

@@ -1,0 +1,42 @@
+This is ApacheBench, Version 2.3 <$Revision: 1879490 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+
+
+Server Software:        
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /api/job/redis
+Document Length:        23 bytes
+
+Concurrency Level:      10
+Time taken for tests:   0.418 seconds
+Complete requests:      500
+Failed requests:        0
+Total transferred:      78000 bytes
+HTML transferred:       11500 bytes
+Requests per second:    1195.25 [#/sec] (mean)
+Time per request:       8.366 [ms] (mean)
+Time per request:       0.837 [ms] (mean, across all concurrent requests)
+Transfer rate:          182.09 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   0.9      1       5
+Processing:     2    7   9.1      5      58
+Waiting:        2    7   9.1      4      58
+Total:          3    8   9.1      6      59
+
+Percentage of the requests served within a certain time (ms)
+  50%      6
+  66%      7
+  75%      7
+  80%      8
+  90%     10
+  95%     25
+  98%     55
+  99%     58
+ 100%     59 (longest request)

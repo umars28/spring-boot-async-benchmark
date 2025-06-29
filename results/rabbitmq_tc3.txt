@@ -1,0 +1,42 @@
+This is ApacheBench, Version 2.3 <$Revision: 1879490 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+
+
+Server Software:        
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /api/job/rabbitmq
+Document Length:        26 bytes
+
+Concurrency Level:      10
+Time taken for tests:   0.366 seconds
+Complete requests:      500
+Failed requests:        0
+Total transferred:      79500 bytes
+HTML transferred:       13000 bytes
+Requests per second:    1365.12 [#/sec] (mean)
+Time per request:       7.325 [ms] (mean)
+Time per request:       0.733 [ms] (mean, across all concurrent requests)
+Transfer rate:          211.97 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   4.4      0      43
+Processing:     1    6  25.3      2     315
+Waiting:        0    5  25.3      2     315
+Total:          1    7  25.6      3     316
+
+Percentage of the requests served within a certain time (ms)
+  50%      3
+  66%      4
+  75%      4
+  80%      5
+  90%      7
+  95%     16
+  98%     45
+  99%    114
+ 100%    316 (longest request)

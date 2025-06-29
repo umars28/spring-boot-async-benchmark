@@ -1,23 +1,24 @@
 package com.spring.boot.async.bench.queue;
 
-import com.spring.boot.async.bench.service.JobService;
+import com.spring.boot.async.bench.util.JobSimulator;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class RabbitMQJobConsumer {
-    private final JobService jobService;
 
-    public RabbitMQJobConsumer(JobService jobService) {
-        this.jobService = jobService;
-    }
+    @RabbitListener(queues = "job-queue")
+    public void handleJob(String message) {
+        long startTime = Long.parseLong(message);
+        long now = System.currentTimeMillis();
 
-    @RabbitListener(queues = "job.queue")
-    public void processJob(Long createdAtMillis) {
-        long received = System.currentTimeMillis();
-        System.out.println("🕓 Queue latency: " + (received - createdAtMillis) + " ms");
-        jobService.runHeavyJob();
-        long done = System.currentTimeMillis();
-        System.out.println("✅ ASYNC job finished in total: " + (done - createdAtMillis) + " ms");
+        log.info("🐰 [RabbitMQ] 🕓 Queue latency: {} ms", now - startTime);
+
+        JobSimulator.simulateHeavyJob();
+
+        log.info("✅ [RabbitMQ] Job finished in total: {} ms", System.currentTimeMillis() - startTime);
     }
 }
+

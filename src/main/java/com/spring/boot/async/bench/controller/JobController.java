@@ -15,20 +15,43 @@ public class JobController {
     @GetMapping("/sync")
     public ResponseEntity<String> runSyncJob() {
         long start = System.currentTimeMillis();
-
-        jobService.runHeavyJob();
-
+        jobService.runSync();
         long end = System.currentTimeMillis();
-        return ResponseEntity.ok("Sync job done in " + (end - start) + " ms");
+        return ResponseEntity.ok("✅ SYNC job done in " + (end - start) + " ms");
     }
 
-    @GetMapping("/async")
-    public ResponseEntity<String> runAsyncJob() {
+    @GetMapping("/async/simple")
+    public ResponseEntity<String> runSimpleAsyncJob() {
         long now = System.currentTimeMillis();
+        jobService.runSimpleAsync(now);
+        return ResponseEntity.accepted().body("✅ SIMPLE ASYNC job started");
+    }
 
-        jobService.enqueueJob(now);
+    @GetMapping("/async/thread-pool")
+    public ResponseEntity<String> runThreadPoolAsyncJob() {
+        long now = System.currentTimeMillis();
+        jobService.runThreadPoolAsync(now);
+        return ResponseEntity.accepted().body("✅ THREAD POOL ASYNC job started");
+    }
 
-        return ResponseEntity.accepted().body("Async job enqueued at " +now);
+    @GetMapping("/rabbitmq")
+    public ResponseEntity<String> runRabbitMqJob() {
+        long now = System.currentTimeMillis();
+        jobService.sendToRabbitMq(now);
+        return ResponseEntity.accepted().body("📩 RabbitMQ job enqueued");
+    }
 
+    @GetMapping("/kafka")
+    public ResponseEntity<String> runKafkaJob() {
+        long now = System.currentTimeMillis();
+        jobService.sendToKafka(now);
+        return ResponseEntity.accepted().body("📩 Kafka job enqueued");
+    }
+
+    @GetMapping("/redis")
+    public ResponseEntity<String> runRedisJob() {
+        long now = System.currentTimeMillis();
+        jobService.sendToRedis(now);
+        return ResponseEntity.accepted().body("📩 Redis job enqueued");
     }
 }
